@@ -1,0 +1,116 @@
+.auth-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.logo-box{
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  gap: 5px;
+  font-size: larger;
+  }
+
+.logo{
+  width: 60px;
+}
+
+.form-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-box {
+  width: 80vw;
+  height: 70vh;
+  border-radius: 10px;
+  display: flex;
+
+  overflow: hidden;
+  box-shadow: 0 0 8px 0px rgb(149, 149, 149);
+  margin-top: 20px;
+}
+
+.slides-container{
+  background-color: #7e11a6;
+  width: 100%;
+  height: 100%;
+}
+.auth-container{
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+}
+
+.form-wrapper{
+  width: 60%;
+}
+
+.heading{
+  width: 100%;
+  margin: 40px 0 10px 0;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label{
+  font-size: 10px;
+}
+
+.form-input{
+    padding: 0.5rem;
+    border: 1.5px solid rgb(220, 220, 220);
+    border-radius: 4px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    font-size: 11px;
+}
+
+.form-star{
+  color: red;
+}
+
+.grey-text{
+  font-size: 10px;
+  color: grey;
+  cursor: pointer;
+  margin: 2px 0;
+}
+
+.submit-btn{
+  width: 40%;
+  margin: 10px 0;
+  border-radius: 16px;
+  border: none;
+  padding: 6px 0;
+  color: white;
+  background-color:#7e11a6;
+  font-size: 11px;
+}
+
+.disabled-btn{
+  width: 40%;
+  margin: 10px 0;
+  border-radius: 16px;
+  border: none;
+  padding: 6px 0;
+  color: white;
+  background-color: grey;
+  font-size: 11px;
+}
+
+.routing-text{
+  font-size: 11px;
+}
+
+.routing-highlight{
+  color: #7e11a6;
+}
