@@ -3,59 +3,55 @@ import "./Auth.css";
 import logo from "/src/assets/logo.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import Loading from "../components/Loading";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 
-const Login = () => {
+const Register = () => {
   const [isDisabled, setIsdisabled] = useState(true);
 
-  const [fullname, setFullname] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [cpassword, setCpassword] = useState();
+  const [fullname, setFullname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cpassword, setCpassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    if(fullname&&email&&password&&cpassword){
+  useEffect(() => {
+    if (fullname && email && password && cpassword && password === cpassword) {
       setIsdisabled(false);
-    }
-    else{
+    } else {
       setIsdisabled(true);
     }
-
-  },[fullname,email,password,cpassword])
+  }, [fullname, email, password, cpassword]);
 
   const handleRegister = async (e) => {
     e.preventDefault();
     if (fullname && email && password && cpassword && password === cpassword) {
       // set register data in user register state
       // console.log(registerData)
-      dispatch(
-        setRegisterData({
-          fullname,
-          email,
-          password,
-        })
-      );
-      setLoading(true);
       localStorage.clear("token");
       try {
         const resp = await axios.post(
-          `${import.meta.env.VITE_BACKEND_URL}/user/register`,
+          `${import.meta.env.VITE_BACKEND_URL}/admin/register`,
           {
-            firstname: fname,
+            name: fullname,
             email: email,
             password: password,
           }
         );
         if (resp.status === 201) {
-          localStorage.setItem("token", resp.data.token);
-          setLoading(false);
           toast.success(resp.data.message);
           navigate("/");
         }
       } catch (error) {
         //console.error('There was an error saving the form data!', error.response.data.message);
-        toast.error(error.response.data.message);
+        toast.error(error.response);
+        console.log(error);
         setLoading(false);
       }
     }
@@ -116,7 +112,7 @@ const Login = () => {
               <span className="grey-text">Forget Password?</span>
               <button
                 className={`${isDisabled ? `disabled-btn` : `submit-btn`}`}
-                // disabled={isDisabled}
+                disabled={isDisabled}
                 onClick={handleRegister}
               >
                 Register
@@ -135,4 +131,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

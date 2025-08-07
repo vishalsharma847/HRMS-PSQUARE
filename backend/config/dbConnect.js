@@ -5,7 +5,7 @@ const dbConnect = async () => {
         const connected = mongoose.connect(process.env.MONGO_URI, {
             dbName: "HRMS",
         });
-        console.log(`DB connected successfully ............ ${(await connected).connection.host}`)
+        console.log(`HRMS DB connected successfully ............ ${(await connected).connection.host}`)
     } catch (error) {
         console.log("DB Connection failed", error.message);
         process.exit(1);

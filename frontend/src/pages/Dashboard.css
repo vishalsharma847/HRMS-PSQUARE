@@ -1,0 +1,279 @@
+.dashboard-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  width: 100vw;
+  height: 100vh;
+}
+
+.side-bar {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 18px;
+  height: 100vh;
+  width: 100%;
+  min-width: 210px;
+  background-color: transparent;
+  border-right: 2px solid rgb(189, 189, 189);
+}
+
+.logo-box {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  gap: 5px;
+  font-size: larger;
+}
+
+.logo {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.search-box {
+  height: 28px;
+  width: fit-content;
+  border: 1px solid gainsboro;
+  padding: 3px 6px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+}
+.transparent-input {
+  background-color: transparent;
+  border: none;
+  flex-grow: 1;
+}
+
+.transparent-input:focus {
+  outline: none;
+}
+
+.icons {
+  margin-right: 2px;
+}
+
+.grey-text {
+  font-size: 12px;
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
+
+.side-bar-btn {
+  display: flex;
+  justify-content: start;
+  margin: 8px 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  align-items: center;
+}
+
+.side-bar-btn-active {
+  display: flex;
+  justify-content: start;
+  margin: 8px 0;
+  border: none;
+  color: #7e11a6;
+  cursor: pointer;
+  align-items: center;
+  background: transparent;
+}
+
+.btn-icons-side-bar {
+  margin: 4px 12px 4px 2px;
+  font-size: 14px;
+}
+
+.logout-icon {
+  margin: 4px 10px 4px 2px;
+  font-size: 16px;
+}
+
+.content-container {
+  width: 100%;
+  height: 100%;
+  grid-column: span 10;
+}
+
+.top-section {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-size: large;
+}
+
+.flex {
+  display: flex;
+  align-items: flex-start;
+}
+
+.bottom-section {
+  padding: 0 20px 10px 20px;
+  margin-top: 0;
+}
+
+.purple-btn {
+  width: fit-content;
+  height: 28px;
+  border-radius: 16px;
+  border: none;
+  padding: 6px 20px;
+  color: white;
+  background-color: #7e11a6;
+  font-size: 14px;
+}
+
+.select-option {
+  height: 28px;
+  padding: 0 20px 0 10px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  background: transparent;
+}
+
+.select-cont {
+  padding-right: 8px;
+  background-color: white;
+  border: 1px solid gainsboro;
+  border-radius: 12px;
+  width: fit-content;
+}
+
+.gap-y {
+  column-gap: 20px;
+}
+
+.btn-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.margin-y {
+  margin: 10px 0;
+}
+
+.table-wrapper {
+  box-shadow: 0 0 3px 0px grey;
+  border-radius: 10px;
+  margin-top: 12px;
+}
+
+.table-cont {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+thead {
+  background-color: #7e11a6;
+  color: whitesmoke;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  vertical-align: center;
+}
+
+tr {
+  height: 20px;
+}
+
+/* CANDIDATES SECTION  */
+
+.action-data {
+  position: relative;
+}
+
+.action-box {
+  position: absolute;
+  z-index: 10;
+  width: 60px;
+  height: fit-content;
+  background-color: white;
+  box-shadow: 0 0 2px 0;
+  left: -48px;
+  top: 20px;
+  border-radius: 4px;
+}
+
+.action-btn {
+  background-color: transparent;
+  border: none;
+  padding: 6px 8px;
+  width: 100%;
+}
+.action-btn:hover{
+  background-color: gainsboro;
+}
+
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.form-box {
+  width: 60vw;
+  height: 60vh;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.modal-heading{
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: large;
+    font-weight: 400;
+    background-color: #7e11a6;
+    color: aliceblue;
+    position: relative;
+}
+
+.cross{
+    position: absolute;
+    right: 16px;
+}
+
+.modal-input-cont{
+    display: grid;
+    margin: 20px;
+    column-gap: 36px;
+    row-gap: 20px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.modal-input{
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1.5px solid gainsboro;
+}
+
+.full-length{
+    grid-column: span 2;
+    display: flex;
+    column-gap: 4px;
+    font-size: small;
+    color: grey;
+}
+
+.save-btn{
+    display: flex;
+    justify-content: center;
+}
