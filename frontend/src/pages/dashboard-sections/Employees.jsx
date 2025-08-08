@@ -9,18 +9,17 @@ import { RxCross2 } from "react-icons/rx";
 const Employees = () => {
   const [allemployees, setAllEmployees] = useState();
 
-    const [isModalopen, setIsmodalopen] = useState(false);
-    const [type, setType] = useState("New");
-    const [candidateId, setCandidateId] = useState(null);
-    const [filterStatus, setFilterstatus] = useState("New");
-  
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phoneno, setPhoneno] = useState("");
-    const [position, setPosition] = useState("");
-    const [experience, setExperience] = useState(0);
-    const [resumeFile, setResumeFile] = useState(null);
-    const [checkbox, setCheckbox] = useState(false);
+  const [isModalopen, setIsmodalopen] = useState(false);
+  const [type, setType] = useState("New");
+  const [employeeId, setEmployeeId] = useState(null);
+  const [filterStatus, setFilterstatus] = useState("New");
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneno, setPhoneno] = useState("");
+  const [position, setPosition] = useState("");
+  const [department, setDepartment] = useState("Not assigned yet");
+  const [joindate, setJoindate] = useState("");
 
   console.log(allemployees);
 
@@ -43,6 +42,43 @@ const Employees = () => {
     } catch (error) {
       console.error(error?.response?.data || error?.message);
       toast.error("Something went wrong");
+    }
+  };
+
+  const handleUpdateEmployee = async (e) => {
+    e.preventDefault();
+    console.log(employeeId);
+    try {
+      const response = await axios.put(
+        `${
+          import.meta.env.VITE_BACKEND_URL
+        }/employee/edit/${employeeId}`,
+        {
+          name,
+          phoneno,
+          email,
+          position,
+          department,
+          joinDate:joindate
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (response.status === 201) {
+        console.log("Candidate updated:", response.data);
+        toast.success("Candidate updated successfully");
+        setIsmodalopen(false);
+        window.location.reload();
+        // setFormData({});
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+      console.error(error.response?.data || error.message);
     }
   };
 
@@ -95,10 +131,9 @@ const Employees = () => {
                 emailfunc={setEmail}
                 phonefunc={setPhoneno}
                 positionfunc={setPosition}
-                experiencefunc={setExperience}
-                resumefunc={setResumeFile}
-                typefunc={setType}
-                idfunc={setCandidateId}
+                departmentfunc={setDepartment}
+                joindatefunc={setJoindate}
+                idfunc={setEmployeeId}
               />
             ))}
           </tbody>
@@ -142,39 +177,27 @@ const Employees = () => {
                 placeholder="Position"
                 className="modal-input"
               />
+              <div className="modal-input">
+                <select value={department} defaultValue={"Not assigned yet"} onChange={(e) => setDepartment(e.target.value)} className="">
+                  <option value="Not assigned yet">Not assigned yet</option>
+                  <option value="Design">Design</option>
+                  <option value="Development">Development</option>
+                  <option value="Testing">Testing</option>
+                </select>
+              </div>
               <input
-                type="tel"
-                value={experience}
-                onChange={(e) => setExperience(e.target.value)}
-                maxLength={2}
-                placeholder="Experience"
+                type="date"
+                value={joindate}
+                onChange={(e) => setJoindate(e.target.value)}
+                placeholder="Position"
                 className="modal-input"
               />
-              <input
-                type="file"
-                accept="application/pdf"
-                onChange={(e) => setResumeFile(e.target.files[0])}
-                placeholder="Resume"
-                className="modal-input"
-              />
-              <span className="full-length">
-                <input
-                  type="checkbox"
-                  value={checkbox}
-                  onClick={(e) => setCheckbox(e.target.checked)}
-                />{" "}
-                I hereby declare that the above information is true to the best
-                of my knowledge and belief.
-              </span>
               <span className="full-length save-btn">
                 <button
-                  // onClick={
-                  //   type === "New"
-                  //     ? handleCreateCandidate
-                  //     : handleUpdateCandidate
-                  // }
-                  className={`${checkbox ? `submit-btn` : `disabled-btn`}`}
-                  disabled={!checkbox}
+                  onClick={
+                       handleUpdateEmployee
+                  }
+                  className="submit-btn"
                 >
                   Save
                 </button>

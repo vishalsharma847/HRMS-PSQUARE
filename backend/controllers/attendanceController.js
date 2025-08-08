@@ -6,11 +6,12 @@ import Attendance from "../model/Attendance.js";
 
 
 export const createAttendance = asynchandler(async (req, res) => {
-    const {task,employeeId} = req.body;
+    const {task,employeeId, name} = req.body;
     const attendanceNo =  await increaseCount("attendence") 
     console.log(attendanceNo)
     const attendance = await Attendance.create({
         employee:employeeId,
+        name,
         task,
         srno:attendanceNo,
     });
@@ -29,7 +30,7 @@ export const getAllAttendance = asynchandler(async (req, res, next) => {
     const sortDirection = req.query.sort === 'asc' ? 1 : -1;
     const attendance = await Attendance.find().populate({
             path: 'employee', 
-            select: 'name photourl department position'
+            select: 'name department position'
         })
         .sort({ createdAt: sortDirection })
     const attendanceLength = await Attendance.countDocuments();

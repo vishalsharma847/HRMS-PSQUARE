@@ -8,6 +8,7 @@ import { globalErrhandler, notFound } from "../middleware/globalErrorhandler.js"
 import adminRoutes from "../routes/adminRoutes.js";
 import candidateRoutes from "../routes/candidateRoutes.js";
 import employeeRoutes from "../routes/employeeRoutes.js";
+import attendanceRoutes from "../routes/attendanceRoutes.js";
 // import attendanceRoutes from "../routes/attendanceRoutes.js";
 // import leaveRoutes from "../routes/leaveRoutes.js";
 
@@ -35,7 +36,7 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api/v1/admin",adminRoutes );
 app.use("/api/v1/candidate",candidateRoutes);
 app.use("/api/v1/employee",employeeRoutes );
-// app.use("/api/v1/attendance",attendanceRoutes );
+app.use("/api/v1/attendance",attendanceRoutes );
 // app.use("/api/v1/leave",leaveRoutes );
 
 // global error handler middleware

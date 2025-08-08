@@ -18,16 +18,23 @@ import toast from "react-hot-toast";
 
 const Dashboard = () => {
 
-const [currentTab, setCurrenttab] = useState('Candidates');
+const [currentTab, setCurrenttab] = useState(() => {
+  return localStorage.getItem("activeTab") || "Candidates";
+});
 
 const navigate = useNavigate();
 
 const handlelogout = () =>{
-  localStorage.clear('token');
+  localStorage.clear();
   navigate('/');
   toast.success('Logged out successfully')
   
 }
+
+const handleTabChange = (tabName) => {
+  setCurrenttab(tabName);
+  localStorage.setItem("activeTab", tabName);
+};
 
 const rendersection = () =>{
   switch(currentTab){
@@ -61,20 +68,20 @@ const rendersection = () =>{
           />
         </div>
         <p className="grey-text">Recruitment</p>
-        <button onClick={()=>setCurrenttab('Candidates')} className={`${currentTab==='Candidates'?`side-bar-btn-active`:`side-bar-btn`}`}>
+        <button onClick={()=>handleTabChange('Candidates')} className={`${currentTab==='Candidates'?`side-bar-btn-active`:`side-bar-btn`}`}>
           <IoPersonAdd className="btn-icons-side-bar" />
           <span>Candidates</span>
         </button>
         <p className="grey-text">Organisation</p>
-        <button onClick={()=>setCurrenttab('Employees')} className={`${currentTab==='Employees'?`side-bar-btn-active`:`side-bar-btn`}`}>
+        <button onClick={()=>handleTabChange('Employees')} className={`${currentTab==='Employees'?`side-bar-btn-active`:`side-bar-btn`}`}>
           <BsPeopleFill className="btn-icons-side-bar" />
           <span>Employees</span>
         </button>
-        <button onClick={()=>setCurrenttab('Attendance')} className={`${currentTab==='Attendance'?`side-bar-btn-active`:`side-bar-btn`}`}>
+        <button onClick={()=>handleTabChange('Attendance')} className={`${currentTab==='Attendance'?`side-bar-btn-active`:`side-bar-btn`}`}>
           <BsBarChartFill className="btn-icons-side-bar" />
           <span>Attendance</span>
         </button>
-        <button onClick={()=>setCurrenttab('Leaves')} className={`${currentTab==='Leaves'?`side-bar-btn-active`:`side-bar-btn`}`}>
+        <button onClick={()=>handleTabChange('Leaves')} className={`${currentTab==='Leaves'?`side-bar-btn-active`:`side-bar-btn`}`}>
           <BsStars className="btn-icons-side-bar" />
           <span>Leaves</span>
         </button>

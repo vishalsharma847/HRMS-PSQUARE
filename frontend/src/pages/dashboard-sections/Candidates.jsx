@@ -89,7 +89,7 @@ const Candidates = () => {
       const response = await axios.put(
         `${
           import.meta.env.VITE_BACKEND_URL
-        }/candidate/update-status/${candidateId}`,
+        }/candidate/edit/${candidateId}`,
         {
           name,
           phoneno,

@@ -47,7 +47,7 @@ export const getemployees = asynchandler(async (req, res, next) => {
 // get particular
 export const getEmployee = asynchandler(async (req, res) => {
     // console.log(req.params);
-    const employee = await Employee.findOne(req.params.id)
+    const employee = await Employee.findById(req.params.id)
     if (!employee) {
          return res.status(400).json({ status: "error", message: "employee with this email not found" });
     }
@@ -58,11 +58,24 @@ export const getEmployee = asynchandler(async (req, res) => {
     })
 })
 
+export const getEmployeesnames = asynchandler(async (req, res) => {
+    // console.log(req.params);
+    const employee = await Employee.find().select("name")
+    if (!employee) {
+         return res.status(400).json({ status: "error", message: "employee with this email not found" });
+    }
+    res.json({
+        status: "success",
+        message: "employee fetched succcessfully",
+        employee,
+    })
+})
+
 // use in creting task 
 // get particular candidte based on email to convert into empployee return only particular fileds
-export const getCandidaesbyname = asynchandler(async (req, res) => {
-    // console.log(req.params);
-    const employee = await Employee.findOne(req.params.name).select("name position department")
+export const getEmployeebyname = asynchandler(async (req, res) => {
+    console.log(req.params.id);
+    const employee = await Employee.findById(req.params.id).select("name position department")
     if (!employee) {
          return res.status(400).json({ status: "error", message: "employee with this email not found" });
     }
@@ -138,7 +151,7 @@ export const updateStatus = asynchandler(async (req, res) => {
 export const updatedetail = asynchandler(async (req, res) => {
   const { name, phoneno, email,position,department,joinDate} = req.body;
  
-  const employeeFound = await Candidate.findById(req.params.id);
+  const employeeFound = await Employee.findById(req.params.id);
   if (!employeeFound) {
     throw new Error("Employee Not Found");
   }

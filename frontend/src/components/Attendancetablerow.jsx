@@ -3,23 +3,20 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-const Employeetablerow = ({
-  employee,
-  modalfunction,
-  namefunc,
-  emailfunc,
-  phonefunc,
-  positionfunc,
-  departmentfunc,
-  joindatefunc,
-  idfunc,
+const Attendancetablerow = ({
+  attendees,
+  // modalfunction,
+  // namefunc,
+  // emailfunc,
+  // phonefunc,
+  // positionfunc,
+  // departmentfunc,
+  // joindatefunc,
+  // idfunc,
 }) => {
   const [actionDiv, setActiondiv] = useState(false);
 
-
-const date = new Date(employee.joinDate);
-const formattedDate = date.toISOString().split("T")[0]; // "2025-08-07"
-
+  const [status, setStatus] = useState('Status')
 
   const handleDeleteEmployee = async () => {
     try {
@@ -56,18 +53,35 @@ const formattedDate = date.toISOString().split("T")[0]; // "2025-08-07"
     joindatefunc(formattedDate);
     idfunc(employee._id);
   };
+  console.log(attendees);
+  
 
 
   return (
     <>
       <tr>
         <td></td>
-        <td>{employee.name}</td>
-        <td>{employee.email}</td>
-        <td>{employee.phoneno}</td>
-        <td>{employee.position}</td>
-        <td>{employee.department}</td>
-        <td>{formattedDate}</td>
+        <td>{attendees.employee.name}</td>
+        <td>{attendees.employee.position}</td>
+        <td>{attendees.employee.department}</td>
+        <td>{attendees.task}</td>
+                <td>
+          <div className="select-cont">
+            <select
+              value={status}
+              defaultValue={"Status"}
+              onChange={(e) => {
+                setStatus(e.target.value);
+                // handleStatusChange(e.target.value);
+              }}
+              className="select-option"
+            >
+              <option value="Status">Status</option>
+              <option value="Absent">Absent</option>
+              <option value="Present">Present</option>
+            </select>
+          </div>
+        </td>
         <td className="action-data">
           <div onClick={() => setActiondiv(!actionDiv)}>
             <BsThreeDotsVertical />
@@ -95,4 +109,4 @@ const formattedDate = date.toISOString().split("T")[0]; // "2025-08-07"
   );
 };
 
-export default Employeetablerow;
+export default Attendancetablerow;
