@@ -12,7 +12,6 @@ const Candidatetablerow = ({
   positionfunc,
   experiencefunc,
   resumefunc,
-  checkboxfunc,
   typefunc,
   idfunc,
 }) => {
@@ -68,7 +67,7 @@ const Candidatetablerow = ({
       }
       if (response.status === 201) {
         toast.success(response.data.message);
-        // window.location.reload();
+        window.location.reload();
       }
     } catch (error) {
       toast.error("Something went wrong");
